@@ -1,18 +1,13 @@
 import time
+import random
+from playwright.async_api import async_playwright
 
-from playwright.sync_api import sync_playwright
+p = await async_playwright().start()
+browser = await p.chromium.launch_persistent_context(headless=False, user_data_dir="userDir")
+page = await browser.new_page()
 
-with sync_playwright() as p:
-    browser = p.firefox.launch(headless=False)
+await page.goto("https://www.facebook.com/")
+time.sleep(6)
 
-    page = browser.new_page()
-
-    page.goto('https://clash.gg', timeout=60000)
-
-
-
-
-    time.sleep(5)
-
-
-
+# open marketplace in facebook
+await page.goto("https://www.facebook.com/marketplace/create/item")
